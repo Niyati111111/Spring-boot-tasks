@@ -12,9 +12,9 @@ public interface MusixService {
 
     public Musix getById(int id);
 
-    public void deleteById(int id);
+    public List<Musix> deleteById(int id);
 
-    public boolean updateById(Musix musix, int id);
+    public Musix updateById(Musix musix, int id);
 
     public List<Musix> getByName(String name);
 
