@@ -85,8 +85,8 @@ public class MusixControllerTest {
 
     @Test
     public void testDeleteMusic() throws Exception {
-        when(musixService.deleteById(2)).thenReturn(true);
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/muzix/2")
+        when(musixService.deleteById(1)).thenReturn(list);
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/muzix/1")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(musix)))
                 .andExpect(MockMvcResultMatchers.status().isNoContent())
                 .andDo(MockMvcResultHandlers.print());
@@ -95,8 +95,8 @@ public class MusixControllerTest {
     @Test
     public void updateTrack() throws Exception
     {
-        when(musixService.updateById(musix,1)).thenReturn(musix);
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/muzix/1")
+        when(musixService.updateById(musix,2)).thenReturn(musix);
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/muzix/2")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(musix)))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andDo(MockMvcResultHandlers.print());
