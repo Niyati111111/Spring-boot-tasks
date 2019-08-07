@@ -10,7 +10,7 @@ public interface MusixService {
 
     public Musix saveNewMusix(Musix musix) throws TrackAlreadyExistsException;
 
-    public List<Musix> getMusix();
+    public List<Musix> getMusix() throws TrackNotFoundException;
 
     public Musix getById(int id) throws TrackNotFoundException;
 
@@ -18,6 +18,6 @@ public interface MusixService {
 
     public boolean updateById(Musix musix, int id) throws TrackNotFoundException;
 
-    public List<Musix> getByName(String name);
+    public List<Musix> getByName(String name) throws TrackNotFoundException;
 
 }
