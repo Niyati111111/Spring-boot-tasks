@@ -36,21 +36,19 @@ public class MusixServiceImpl implements MusixService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public List<Musix> deleteById(int id) {
         musixRepository.deleteById(id);
+        return musicRepository.findAll();
     }
 
     @Override
-    public boolean updateById(Musix musix, int id) {
+    public Musix updateById(Musix musix, int id) {
         Optional<Musix> userOptional = musixRepository.findById(id);
-
-        if (!userOptional.isPresent())
-            return false;
 
         musix.setId(id);
 
         musixRepository.save(musix);
-        return true;
+        return userOptional.get();
     }
 
 
