@@ -37,7 +37,7 @@ public class MusixController {
     }
 
     @GetMapping("muzix")
-    public ResponseEntity<?> getAllUsers() {
+    public ResponseEntity<?> getAllTracks() {
         ResponseEntity responseEntity;
         try{
             responseEntity = new ResponseEntity<List<Musix>>(musixService.getMusix(), HttpStatus.OK);
