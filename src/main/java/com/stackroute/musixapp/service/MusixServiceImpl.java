@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class MusixServiceImpl implements MusixService, ApplicationListener<ContextRefreshedEvent>, CommandLineRunner {
 
-    MusixRepository musixRepository;
+    private MusixRepository musixRepository;
 
     @Autowired
     public MusixServiceImpl(MusixRepository musixRepository) {
@@ -26,18 +26,22 @@ public class MusixServiceImpl implements MusixService, ApplicationListener<Conte
     @Override
     public Musix saveNewMusix(Musix musix) throws TrackAlreadyExistsException {
         if(musixRepository.existsById(musix.getId())){
-            throw new TrackAlreadyExistsException("User already exists!");
+            throw new TrackAlreadyExistsException("Track already exists!");
         }
         Musix savedTrack = musixRepository.save(musix);
         if(savedTrack == null) {
-            throw new TrackAlreadyExistsException("User already exists!");
+            throw new TrackAlreadyExistsException("Track already exists!");
         }
         return savedTrack;
     }
 
     @Override
-    public List<Musix> getMusix() {
-        return musixRepository.findAll();
+    public List<Musix> getMusix() throws TrackNotFoundException {
+        List<Musix> musixList = musixRepository.findAll();
+        if(musixList.isEmpty()){
+            throw new TrackNotFoundException("Tracks not found");
+        }
+        return musixList;
     }
 
     @Override
@@ -50,16 +54,17 @@ public class MusixServiceImpl implements MusixService, ApplicationListener<Conte
     }
 
     @Override
-    public void deleteById(int id) throws TrackNotFoundException {
+    public List<Musix> deleteById(int id) throws TrackNotFoundException {
         Optional<Musix> userId = musixRepository.findById(id);
         if(userId.isEmpty()){
             throw new TrackNotFoundException("Track not found!");
         }
         musixRepository.deleteById(id);
+        return musixRepository.findAll();
     }
 
     @Override
-    public boolean updateById(Musix musix, int id) throws TrackNotFoundException {
+    public Musix updateById(Musix musix,int id) throws TrackNotFoundException {
         Optional<Musix> userOptional = musixRepository.findById(id);
 
         if(userOptional.isEmpty()){
@@ -69,12 +74,15 @@ public class MusixServiceImpl implements MusixService, ApplicationListener<Conte
         musix.setId(id);
 
         musixRepository.save(musix);
-        return true;
+        return userOptional.get();
     }
 
     @Override
-    public List<Musix> getByName(String name) {
+    public List<Musix> getByName(String name) throws TrackNotFoundException{
         List<Musix> userId = musixRepository.findTitleByName(name);
+        if(userId.isEmpty()){
+            throw new TrackNotFoundException("Track not found!");
+        }
         return userId;
     }
 
