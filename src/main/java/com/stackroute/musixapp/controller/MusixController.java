@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("muzixapp/v1")
+@RequestMapping("api/v1")
 public class MusixController {
 
 
@@ -64,7 +64,7 @@ public class MusixController {
         return responseEntity;
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/muzix/{id}")
     public String deleteMusix(@PathVariable int id) {
 
         try {
@@ -76,7 +76,7 @@ public class MusixController {
         return "Data deleted";
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/muzix/{id}")
     public String updateMusix(@RequestBody Musix musix, @PathVariable int id) {
 
         try {
