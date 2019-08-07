@@ -1,4 +1,4 @@
-#MusicApp implemented using mongodb
+# MusicApp implemented using mongodb
 
 Muzix Application Case Study
 
