@@ -91,7 +91,7 @@ public class MusixController {
         return responseEntity;
     }
 
-    @GetMapping("/names/{name}")
+    @GetMapping("/muzix/{name}")
     public ResponseEntity<List<Musix>> getByName(@PathVariable String name) throws TrackNotFoundException {
         List<Musix> musix = musixService.getByName(name);
         return new ResponseEntity<List<Musix>>(musix, HttpStatus.OK);
