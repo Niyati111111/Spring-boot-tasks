@@ -12,8 +12,8 @@ public interface MusixService {
 
     public Musix getById(int id);
 
-    public void deleteById(int id);
+    public boolean deleteById(int id);
 
-    public boolean updateById(Musix musix, int id);
+    public Musix updateById(Musix musix, int id);
 
 }
