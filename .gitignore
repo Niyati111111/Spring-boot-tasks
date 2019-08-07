@@ -3,6 +3,11 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+musixapp.iml
+mvnw
+mvnw.cmd
+.mvn
+
 
 ### STS ###
 .apt_generated
