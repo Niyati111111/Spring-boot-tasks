@@ -45,13 +45,10 @@ public class MusixServiceImpl implements MusixService {
     public Musix updateById(Musix musix, int id) {
         Optional<Musix> userOptional = musixRepository.findById(id);
 
-        if (!userOptional.isPresent())
-            return false;
-
         musix.setId(id);
 
         musixRepository.save(musix);
-        return musix;
+        return userOptional.get();
     }
 
 
