@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class MusixServiceImpl implements MusixService {
 
-    MusixRepository musixRepository;
+    private MusixRepository musixRepository;
 
     @Autowired
     public MusixServiceImpl(MusixRepository musixRepository) {
@@ -36,12 +36,13 @@ public class MusixServiceImpl implements MusixService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public boolean deleteById(int id) {
         musixRepository.deleteById(id);
+        return true;
     }
 
     @Override
-    public boolean updateById(Musix musix, int id) {
+    public Musix updateById(Musix musix, int id) {
         Optional<Musix> userOptional = musixRepository.findById(id);
 
         if (!userOptional.isPresent())
@@ -50,7 +51,7 @@ public class MusixServiceImpl implements MusixService {
         musix.setId(id);
 
         musixRepository.save(musix);
-        return true;
+        return musix;
     }
 
 
