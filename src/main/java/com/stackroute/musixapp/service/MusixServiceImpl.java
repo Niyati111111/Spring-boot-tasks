@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class MusixServiceImpl implements MusixService {
 
-    MusixRepository musixRepository;
+   private MusixRepository musixRepository;
 
     @Autowired
     public MusixServiceImpl(MusixRepository musixRepository) {
@@ -32,9 +32,13 @@ public class MusixServiceImpl implements MusixService {
         return savedTrack;
     }
 
-    @Override
-    public List<Musix> getMusix() {
-        return musixRepository.findAll();
+     @Override
+    public List<Musix> getMusix() throws TrackNotFoundException {
+        List<Musix> musixList = musixRepository.findAll();
+        if(musixList.isEmpty()){
+            throw new TrackNotFoundException("Tracks not found");
+        }
+        return musixList;
     }
 
     @Override
@@ -69,10 +73,12 @@ public class MusixServiceImpl implements MusixService {
         return true;
     }
 
-    @Override
-    public List<Musix> getByName(String name) {
+   @Override
+    public List<Musix> getByName(String name) throws TrackNotFoundException{
         List<Musix> userId = musixRepository.findTitleByName(name);
+        if(userId.isEmpty()){
+            throw new TrackNotFoundException("Track not found!");
+        }
         return userId;
     }
-
 }
