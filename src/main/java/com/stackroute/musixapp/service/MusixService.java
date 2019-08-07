@@ -12,7 +12,7 @@ public interface MusixService {
 
     public Musix getById(int id);
 
-    public boolean deleteById(int id);
+    public List<Musix> deleteById(int id);
 
     public Musix updateById(Musix musix, int id);
 
