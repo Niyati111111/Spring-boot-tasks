@@ -68,15 +68,15 @@ public class MusixServiceImpl implements MusixService, ApplicationListener<Conte
     }
 
     @Override
-    public boolean deleteById(int id) throws TrackNotFoundException {
+    public List<Musix> deleteById(int id) throws TrackNotFoundException {
         Optional<Musix> userId = musixRepository.findById(id);
         if(userId.isEmpty()){
             throw new TrackNotFoundException("Track not found!");
         }
         musixRepository.deleteById(id);
-        return true;
+        return musixRepository.findAll();
     }
-
+    
     @Override
     public Musix updateById(Musix musix,int id) throws TrackNotFoundException {
         Optional<Musix> userOptional = musixRepository.findById(id);
