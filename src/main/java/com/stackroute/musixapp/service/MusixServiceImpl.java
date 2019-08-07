@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class MusixServiceImpl implements MusixService, ApplicationListener<ContextRefreshedEvent>, CommandLineRunner {
 
-    MusixRepository musixRepository;
+    private MusixRepository musixRepository;
 
     @Autowired
     public MusixServiceImpl(MusixRepository musixRepository) {
