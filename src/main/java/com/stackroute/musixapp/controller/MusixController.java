@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("muzixapp/v1")
+@RequestMapping("api/v1")
 public class MusixController {
 
 
@@ -55,13 +55,13 @@ public class MusixController {
         return new ResponseEntity<Musix>(musix, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/muzix/{id}")
     public String deleteMusix(@PathVariable int id) {
         musixService.deleteById(id);
         return "Data deleted";
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/muzix/{id}")
     public String updateMusix(@RequestBody Musix musix, @PathVariable int id) {
 
         musixService.updateById(musix, id);
